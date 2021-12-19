@@ -1,0 +1,25 @@
+name:                bofill
+version:             0.0.0.1
+synopsis:            Procedural cityscape generation
+
+description:         Will generate .obj files representing procedurally generated cityscapes.
+                     Absolutely not functional yet.
+
+license:             AllRightsReserved
+author:              Grégoire Locqueville
+maintainer:          gregoireloc@gmail.com
+copyright:           (c) Grégoire Locqueville, 2021
+category:            Game
+build-type:          Simple
+extra-source-files:  README.markdown
+cabal-version:       >=1.10
+
+executable bofill
+  main-is:             Main.hs
+  other-modules:       Obj,
+                       ObjUtils
+  other-extensions:    OverloadedStrings
+  build-depends:       base >=4.12 && <4.13,
+                       text
+  hs-source-dirs:      src
+  default-language:    Haskell2010

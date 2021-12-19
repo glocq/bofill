@@ -1,0 +1,13 @@
+# Written by cabal:
+.ghc*
+
+# Vim swap files
+*.swp
+
+# Build directory
+dist/*
+dist-newstyle/*
+
+# Generated 3D files
+*.obj
+
