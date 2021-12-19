@@ -52,3 +52,22 @@ extrude verts shiftBottom shiftTop =
                                i    `mod` n + 1 + n] | i <- [0 .. n-1] ]
     in mempty { vertices = mempty { vg = allVerts, nvg = 2*n },
                 faces = bottomFace : topFace : lateralFaces }
+
+-- | Same as above, but without including the top and bottom faces
+extrudeContour :: [GVert] -- ^ Vertices of the base polygon. Counterclockwise as seen from above
+               -> (Double, Double, Double) -- ^ Translation vector for the /bottom/ face
+               -> (Double, Double, Double) -- ^ Translation vector for the /top/ face
+               -> Obj
+extrudeContour verts shiftBottom shiftTop =
+    let n = length verts
+        bottomVerts = fmap (translate shiftBottom) $ verts
+        topVerts    = fmap (translate shiftTop   )   verts
+        allVerts = bottomVerts ++ topVerts
+        -- A bit of dark magic going on here, but you can check that we get
+        -- a quadrilateral for each original pair of contiguous vertices
+        lateralFaces = [Face [ i    `mod` n + 1,
+                              (i+1) `mod` n + 1,
+                              (i+1) `mod` n + 1 + n,
+                               i    `mod` n + 1 + n] | i <- [0 .. n-1] ]
+    in mempty { vertices = mempty { vg = allVerts, nvg = 2*n },
+                faces = lateralFaces }

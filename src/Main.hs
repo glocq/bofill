@@ -19,6 +19,7 @@ v5 = GVert 1 2 0 Nothing
 v6 = GVert 0 1 0 Nothing
 
 vol = extrude [v1, v2, v3, v4, v5, v6] (-1, 0, -2) (0, 1, 5)
+emptyVol = extrudeContour [v1, v2, v3, v4, v5, v6] (4, 0, -2) (5, 1, 5)
 
 main :: IO ()
-main = T.writeFile "test.obj" $ objToText vol
+main = T.writeFile "test.obj" $ objToText (vol <> emptyVol)
